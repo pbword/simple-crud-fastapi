@@ -13,6 +13,10 @@ class TaskCreate(BaseModel):
     title: str
     done: bool = False
 
+class TaskUpdate(BaseModel):
+    title: str | None = None
+    done: bool | None = None
+
 app = FastAPI(
     title="Task API",
     description="A simple CRUD API built using FastAPI.",
@@ -45,6 +49,47 @@ def create_task(task: TaskCreate):
     tasks.append(new_task)
 
     return new_task
+
+@app.put("/tasks/{id}")
+def update_task(id: int, task_update: TaskUpdate):
+    if task_update.title is None and task_update.done is None:
+        raise HTTPException(
+            status_code=400,
+            detail="At least one field must be provided"
+        )
+
+    for task in tasks:
+        if task["id"] == id:
+
+            if task_update.title is not None:
+                if not task_update.title.strip():
+                    raise HTTPException(
+                        status_code=400,
+                        detail="Title cannot be empty"
+                    )
+                task["title"] = task_update.title
+
+            if task_update.done is not None:
+                task["done"] = task_update.done
+
+            return task
+
+    raise HTTPException(
+        status_code=404,
+        detail=f"Task {id} not found"
+    )
+
+@app.delete("/tasks/{id}", status_code=204)
+def delete_task(id: int):
+    for index, task in enumerate(tasks):
+        if task["id"] == id:
+            tasks.pop(index)
+            return
+
+    raise HTTPException(
+        status_code=404,
+        detail=f"Task {id} not found"
+    )
 
 @app.get("/tasks", summary="Get all tasks")
 def get_tasks():
