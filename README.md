@@ -25,8 +25,8 @@ A simple CRUD API for managing a to-do list, built with Python and FastAPI.
 
 ### 1. Clone the repository
 
-    git clone https://github.com/pbword/simple-crud-fastapi
-    cd simple-crud-fastapi
+    git clone https://github.com/pbword/task-crud-fastapi
+    cd task-crud-fastapi
 
 ### 2. Create a virtual environment
 
