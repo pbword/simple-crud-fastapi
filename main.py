@@ -124,3 +124,5 @@ def health():
     return {
         "status": "ok"
     }
+
+# Tested on Swagger UI and all endpoints are working as expected.
