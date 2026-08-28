@@ -65,6 +65,8 @@ Open:
 
 You can use Swagger UI to test all API endpoints directly from your browser.
 
+![Swagger UI](swagger-ui.png)
+
 ## Endpoints
 
 | Method | Endpoint | Description |
@@ -126,3 +128,19 @@ Update a task:
 Delete a task:
 
     curl -X DELETE http://localhost:8000/tasks/1
+
+Example request:
+
+    curl -i -X POST http://localhost:8000/tasks \
+      -H "Content-Type: application/json" \
+      -d '{"title":"Test CRUD with curl"}'
+
+Example response:
+    
+        HTTP/1.1 201 Created
+    date: Fri, 28 Aug 2026 20:22:35 GMT
+    server: uvicorn
+    content-length: 51
+    content-type: application/json
+
+    {"id":4,"title":"Test CRUD with curl","done":false}
