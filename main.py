@@ -4,13 +4,47 @@ tasks = [
     {"id": 3, "title": "Deploy an AI project", "done": False},
 ]
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request, status
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
+from pydantic import BaseModel
+
+class TaskCreate(BaseModel):
+    title: str
+    done: bool = False
 
 app = FastAPI(
     title="Task API",
     description="A simple CRUD API built using FastAPI.",
     version="1.0"
 )
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    return JSONResponse(
+        status_code=400,
+        content={"detail": "Invalid task data"}
+    )
+
+@app.post("/tasks", status_code=status.HTTP_201_CREATED)
+def create_task(task: TaskCreate):
+    if not task.title.strip():
+        raise HTTPException(
+            status_code=400,
+            detail="Title cannot be empty"
+        )
+
+    new_id = max(task["id"] for task in tasks) + 1
+
+    new_task = {
+        "id": new_id,
+        "title": task.title,
+        "done": task.done
+    }
+
+    tasks.append(new_task)
+
+    return new_task
 
 @app.get("/tasks", summary="Get all tasks")
 def get_tasks():
