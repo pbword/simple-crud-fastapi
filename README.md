@@ -1,4 +1,4 @@
-# Task API
+# CRUD API
 
 A simple CRUD API for managing a to-do list, built with Python and FastAPI.
 
@@ -11,6 +11,7 @@ A simple CRUD API for managing a to-do list, built with Python and FastAPI.
 - Delete tasks
 - Input validation
 - Health check endpoint
+- Correct HTTP status codes for all operations
 - Interactive API documentation with Swagger UI
 
 ## Tech Stack
