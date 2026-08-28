@@ -1,4 +1,4 @@
-# CRUD API
+# Task API
 
 A simple CRUD API for managing a to-do list, built with Python and FastAPI.
 
