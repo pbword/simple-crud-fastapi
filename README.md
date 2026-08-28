@@ -20,20 +20,12 @@ A simple CRUD API for managing a to-do list, built with Python and FastAPI.
 - Uvicorn
 - Pydantic
 
-## Project Structure
-
-    CRUD_API/
-    ├── main.py
-    ├── requirements.txt
-    ├── README.md
-    └── .gitignore
-
 ## Setup
 
 ### 1. Clone the repository
 
-    git clone <YOUR_GITHUB_REPOSITORY_URL>
-    cd CRUD_API
+    git clone https://github.com/pbword/simple-crud-fastapi
+    cd simple-crud-fastapi
 
 ### 2. Create a virtual environment
 
