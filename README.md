@@ -93,14 +93,36 @@ Data is reset whenever the API server restarts.
 
 ## Testing
 
-The API can be tested interactively using Swagger UI:
+The API can be tested using Swagger UI or directly from the command line with `curl`.
 
-    http://localhost:8000/docs
+### Swagger UI
 
-The following operations can be tested:
+Open:
 
-- Creating a task with `POST /tasks`
-- Retrieving tasks with `GET /tasks` and `GET /tasks/{id}`
-- Updating tasks with `PUT /tasks/{id}`
-- Deleting a task with `DELETE /tasks/{id}`
-- Testing validation and error responses
+http://localhost:8000/docs
+
+### curl
+
+Get all tasks:
+
+    curl http://localhost:8000/tasks
+
+Get a task by ID:
+
+    curl http://localhost:8000/tasks/1
+
+Create a task:
+
+    curl -X POST http://localhost:8000/tasks \
+      -H "Content-Type: application/json" \
+      -d '{"title": "Learn FastAPI"}'
+
+Update a task:
+
+    curl -X PUT http://localhost:8000/tasks/1 \
+      -H "Content-Type: application/json" \
+      -d '{"done": true}'
+
+Delete a task:
+
+    curl -X DELETE http://localhost:8000/tasks/1
